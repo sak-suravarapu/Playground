@@ -1,18 +1,36 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"std/hello_world/motd/message"
+	"hello_world/motd/message"
+	"os"
+	"strings"
 )
 
 func main() {
-	message := message.Greeting("Ram", "Hello")
-	fmt.Println(message)
-	fmt.Println(greeting1("Robert", "Bye"))
 
-}
+	f, err := os.OpenFile("/etc/motd", os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Println("Error: Unable to open /etc/motd")
+		os.Exit(1)
+	}
+	defer f.Close()
 
-func greeting1(name, message string) (response string) {
-	response = fmt.Sprintf("%s, %s", message, name)
-	return
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Println("Your Greeting: ")
+	phrase, _ := reader.ReadString('\n')
+	phrase = strings.TrimSpace(phrase)
+	fmt.Println("Your Name: ")
+	name, _ := reader.ReadString('\n')
+	name = strings.TrimSpace(name)
+
+	m := message.Greeting(name, phrase)
+	fmt.Println(m)
+	_, err = f.Write([]byte(m))
+	//err := ioutil.WriteFile("/etc/motd", []byte(m), 0644)
+	if err != nil {
+		fmt.Println("Error: Failed to write to /etc/motd")
+		os.Exit(1)
+	}
 }
