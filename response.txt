@@ -1,14 +1,38 @@
-[{
-    "photoUrls": ["HsqCFlAOwP6"],
-    "name": "cats",
-    "id": "1",
-    "category": {
-        "name": "kitty",
-        "id": "1"
-    },
-    "tags": [{
-        "name": "cats",
-        "id": "1"
-    }],
-    "status": "onhold"
-}]
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.fakecredit.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:creditReportResponse>
+         <ws:out>
+            <!--Zero or more repetitions:-->
+            <ws:Report>
+               <!--type: string-->
+               <ws:firstName>${usregfirstName}</ws:firstName>
+               <!--type: string-->
+               <ws:lastName>${usreglastName}</ws:lastName>
+               <!--type: string-->
+               <ws:dob>${usregdob}</ws:dob>
+               <!--type: string-->
+               <ws:ssn>${usregssn}</ws:ssn>
+               <!--type: string-->
+               <ws:score>${score}</ws:score>
+               <!--type: string-->
+               <ws:latestAddress1>${usaddress}</ws:latestAddress1>
+               <!--type: string-->
+               <ws:latestAddress2></ws:latestAddress2>
+               <!--type: string-->
+               <ws:city>${uscity}</ws:city>
+               <!--type: string-->
+               <ws:state>${usstate}</ws:state>
+               <!--type: string-->
+               <ws:country>${country}</ws:country>
+               <!--type: string-->
+               <ws:postalCode>${uszip}</ws:postalCode>
+               <!--type: string-->
+               <ws:currency>${currencycode}</ws:currency>
+               <!--type: boolean-->
+               <ws:addressValidated>${validated}</ws:addressValidated>
+            </ws:Report>
+         </ws:out>
+      </ws:creditReportResponse>
+   </soapenv:Body>
+</soapenv:Envelope>
